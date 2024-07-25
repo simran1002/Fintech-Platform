@@ -1,11 +1,16 @@
 body {
-    font-family: Arial, sans-serif;
-  }
-  #user-form, #transaction-form {
-    margin: 20px;
-  }
-  label {
-    display: block;
-    margin-top: 10px;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-right: 10px;
+}
+
+#response {
+  margin-top: 20px;
+}

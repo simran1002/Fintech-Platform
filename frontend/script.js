@@ -1,34 +1,43 @@
-document.getElementById('create-user-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-  
-    const response = await fetch('http://localhost:3000/api/users', {
+const API_URL = 'http://localhost:3000';
+
+async function deposit() {
+  const userId = document.getElementById('userId').value;
+  const amount = document.getElementById('amount').value;
+  const responseDiv = document.getElementById('response');
+
+  try {
+    const response = await fetch(`${API_URL}/deposit`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name })
+      body: JSON.stringify({ userId: parseInt(userId), amount: parseFloat(amount) }),
     });
-  
-    const data = await response.json();
-    alert('User created: ' + data.name);
-  });
-  
-  document.getElementById('create-transaction-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const userId = document.getElementById('userId').value;
-    const amount = document.getElementById('amount').value;
-    const type = document.getElementById('type').value;
-  
-    const response = await fetch('http://localhost:3000/api/transactions', {
+
+    const data = await response.text();
+    responseDiv.innerHTML = `Response: ${data}`;
+  } catch (error) {
+    responseDiv.innerHTML = `Error: ${error.message}`;
+  }
+}
+
+async function withdraw() {
+  const userId = document.getElementById('userId').value;
+  const amount = document.getElementById('amount').value;
+  const responseDiv = document.getElementById('response');
+
+  try {
+    const response = await fetch(`${API_URL}/withdraw`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ userId, amount, type })
+      body: JSON.stringify({ userId: parseInt(userId), amount: parseFloat(amount) }),
     });
-  
-    const data = await response.json();
-    alert('Transaction created: ' + data.amount + ' (' + data.type + ')');
-  });
-  
+
+    const data = await response.text();
+    responseDiv.innerHTML = `Response: ${data}`;
+  } catch (error) {
+    responseDiv.innerHTML = `Error: ${error.message}`;
+  }
+}
