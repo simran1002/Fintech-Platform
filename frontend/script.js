@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:8000';
 
 async function deposit() {
   const userId = document.getElementById('userId').value;
